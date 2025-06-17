@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevVault IDE - Enterprise Development Environment</title>
+    <title>Dev Vault IDE - Enterprise Development Environment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe UI:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         :root {
@@ -25,7 +25,7 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: var(--md-background);
             color: var(--md-on-surface);
             height: 100vh;
@@ -324,6 +324,7 @@
         <div class="flex flex-1 overflow-hidden">
             <!-- Left Sidebar -->
             <div class="w-14 bg-white flex flex-col items-center py-4 md-elevation-1">
+               
                 <div class="tooltip sidebar-item active">
                     <span class="material-icons">description</span>
                     <span class="tooltip-text">Explorer</span>
@@ -347,8 +348,10 @@
                 <div class="mt-auto tooltip sidebar-item">
                     <span class="material-icons">help_outline</span>
                     <span class="tooltip-text">Help</span>
+                      
                 </div>
             </div>
+          
             
             <!-- Explorer Panel -->
             <div class="w-64 bg-white border-r border-gray-200 flex flex-col">
@@ -369,6 +372,7 @@
                 <div class="p-2 flex-1 overflow-y-auto">
                     <div class="mb-2">
                         <div class="file-tree-item">
+                            
                             <span class="material-icons text-amber-700">folder_open</span>
                             <span>project-root</span>
                         </div>
@@ -669,7 +673,15 @@
             </div>
         </div>
     </div>
-
+ <script src="fileTree.js"></script>
+    <script src="debugger.js"></script>
+    <script src="editor.js"></script>
+    <script src="extensions.js"></script>
+    <script src="search.js"></script>
+    <script src="settings.js"></script>
+    <script src="sourceControl.js"></script>
+    <script src="terminal.js"></script>
+    <script src="collaboration.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Tab switching functionality
