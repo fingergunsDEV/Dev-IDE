@@ -7,7 +7,281 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Segoe UI:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
+   <style>Add commentMore actions
+        :root {
+            --md-primary: #6750A4;
+            --md-primary-light: #D0BCFF;
+            --md-secondary: #625B71;
+            --md-surface: #FFFBFE;
+            --md-background: #F6F5F8;
+            --md-error: #B3261E;
+            --md-on-primary: #FFFFFF;
+            --md-on-surface: #1C1B1F;
+            --md-on-surface-variant: #49454F;
+            --md-surface-variant: #E7E0EC;
+            --md-outline: #79747E;
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--md-background);
+            color: var(--md-on-surface);
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .material-icons {
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        
+        .md-elevation-1 {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+        
+        .md-elevation-2 {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+        
+        .sidebar-item {
+            border-radius: 100px;
+            padding: 8px 12px;
+            margin: 4px 0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sidebar-item:hover {
+            background-color: var(--md-surface-variant);
+        }
+        
+        .sidebar-item.active {
+            background-color: var(--md-primary-light);
+            color: var(--md-primary);
+            font-weight: 500;
+        }
+        
+        .tab {
+            padding: 8px 16px;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .tab:hover {
+            background-color: rgba(0,0,0,0.04);
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--md-primary);
+            color: var(--md-primary);
+            background-color: white;
+        }
+        
+        .close-icon {
+            opacity: 0.5;
+            font-size: 16px;
+            margin-left: 4px;
+        }
+        
+        .close-icon:hover {
+            opacity: 1;
+        }
+        
+        .file-tree-item {
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .file-tree-item:hover {
+            background-color: var(--md-surface-variant);
+        }
+        
+        .file-tree-item.active {
+            background-color: var(--md-primary-light);
+            color: var(--md-primary);
+        }
+        
+        .folder-content {
+            padding-left: 20px;
+        }
+        
+        .code-editor {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            line-height: 1.5;
+            tab-size: 4;
+            counter-reset: line;
+        }
+        
+        .code-line {
+            position: relative;
+            padding-left: 3.5rem;
+        }
+        
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3rem;
+            text-align: right;
+            color: #888;
+            padding-right: 0.5rem;
+            user-select: none;
+        }
+        
+        .code-line:hover {
+            background-color: rgba(0,0,0,0.04);
+        }
+        
+        .html-tag { color: #0000ff; }
+        .html-attribute { color: #ff0000; }
+        .html-value { color: #008000; }
+        .html-comment { color: #808080; }
+        
+        .terminal {
+            background-color: #1E1E1E;
+            color: #FFFFFF;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            padding: 12px;
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        .terminal-prompt {
+            color: #0DBC79;
+        }
+        
+        .terminal-command {
+            color: #FFFFFF;
+        }
+        
+        .terminal-output {
+            color: #CCCCCC;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: inherit;
+            width: calc(100% - 20px);
+            outline: none;
+        }
+        
+        .live-server {
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .live-server-header {
+            background-color: #F0F0F0;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        .live-server-content {
+            padding: 16px;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+        
+        .status-bar {
+            background-color: var(--md-primary);
+            color: var(--md-on-primary);
+            padding: 4px 16px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--md-on-surface);
+            color: var(--md-surface);
+            text-align: center;
+            border-radius: 4px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Emmet suggestion dropdown */
+        .emmet-suggestion {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 300px;
+        }
+        
+        .emmet-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .emmet-item:hover {
+            background-color: var(--md-surface-variant);
+        }
+        
+        .emmet-item.selected {
+            background-color: var(--md-primary-light);
+        }
+        
+        .emmet-abbr {
+            font-weight: bold;
+            color: var(--md-primary);
+        }
+        
+        .emmet-desc {
+            font-size: 12px;
+            color: var(--md-on-surface-variant);
+        }
         /* ... (keep your existing CSS unchanged for brevity) ... */
     </style>
 </head>
